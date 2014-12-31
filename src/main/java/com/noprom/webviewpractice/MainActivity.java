@@ -3,9 +3,11 @@ package com.noprom.webviewpractice;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,9 +37,9 @@ public class MainActivity extends Activity {
         mRefreshBtn = (Button) findViewById(R.id.id_refresh);
         mTitle = (TextView) findViewById(R.id.id_title);
 
-        mWebView.loadUrl("http://www.baidu.com");
+        mWebView.loadUrl("http://shouji.baidu.com");
         // 重写方法
-        mWebView.setWebChromeClient(new WebChromeClient(){
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 // 改变标题
@@ -59,8 +61,23 @@ public class MainActivity extends Activity {
         mRefreshBtn.setOnClickListener(new MyListener());
         mBackBtn.setOnClickListener(new MyListener());
 
+        // 设置下载接口
+        mWebView.setDownloadListener(new MyDownload());
+
     }
 
+    // 下载类
+    class MyDownload implements DownloadListener {
+        @Override
+        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+            System.out.println("----------------" + url);
+            if (url.endsWith(".apk")) {
+                new HttpThread(url).start();
+            }
+        }
+    }
+
+    // 点击类
     class MyListener implements View.OnClickListener {
 
         @Override
