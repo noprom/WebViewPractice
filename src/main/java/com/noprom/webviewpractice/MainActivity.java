@@ -1,6 +1,8 @@
 package com.noprom.webviewpractice;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.net.URI;
 
 
 public class MainActivity extends Activity {
@@ -72,7 +76,13 @@ public class MainActivity extends Activity {
         public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
             System.out.println("----------------" + url);
             if (url.endsWith(".apk")) {
-                new HttpThread(url).start();
+                // 开启线程下载
+//                new HttpThread(url).start();
+
+                // 通过系统下载
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         }
     }
