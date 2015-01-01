@@ -30,6 +30,8 @@ public class MainActivity extends Activity {
     private Button mRefreshBtn;
     // 标题
     private TextView mTitle;
+    // 错误码提示
+    private TextView mTextView_Error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainActivity extends Activity {
         mBackBtn = (Button) findViewById(R.id.id_back);
         mRefreshBtn = (Button) findViewById(R.id.id_refresh);
         mTitle = (TextView) findViewById(R.id.id_title);
+        mTextView_Error = (TextView) findViewById(R.id.textView_error);
 
         mWebView.loadUrl("http://shouji.baidu.com");
         // 重写方法
@@ -52,13 +55,26 @@ public class MainActivity extends Activity {
             }
         });
 
-        // 设置非浏览器显示
+        // setWebViewClient
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return super.shouldOverrideUrlLoading(view, url);
             }
+
+            // 出现错误的时候处理的方法
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                // 设置错误码信息
+//                mTextView_Error.setText("404 Error");
+                // 隐藏webView
+//                mWebView.setVisibility(View.GONE);
+                view.loadUrl("file:///android_asset/error.html");
+            }
+
         });
 
         // 设置监听事件

@@ -22,10 +22,10 @@
 
         <TextView
             android:id="@+id/id_title"
-            android:paddingTop="15dip"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:paddingTop="15dip"
             android:text="网址" />
 
         <Button
@@ -34,7 +34,24 @@
             android:layout_height="40dip"
             android:layout_alignParentRight="true"
             android:text="刷新" />
+
+
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/web_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--展示错误码信息-->
+        <TextView
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/textView_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#990033" />
+        <!--/展示错误码信息-->
+    </LinearLayout>
 
     <WebView
         android:id="@+id/webView"
