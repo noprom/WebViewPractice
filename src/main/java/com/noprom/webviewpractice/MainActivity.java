@@ -77,6 +77,12 @@ public class MainActivity extends Activity {
 
         });
 
+        /**
+         * 取出Cookie
+         */
+
+        new HttpCookie().start();
+
         // 设置监听事件
         mRefreshBtn.setOnClickListener(new MyListener());
         mBackBtn.setOnClickListener(new MyListener());
