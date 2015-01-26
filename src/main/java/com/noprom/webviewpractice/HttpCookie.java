@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by noprom on 2015/1/2.
+ * Created by noprom.
  * 取出cookie的类
  */
 public class HttpCookie extends Thread {
@@ -25,8 +25,7 @@ public class HttpCookie extends Thread {
     public void run() {
 
         HttpClient client = new DefaultHttpClient();
-        // TODO : ADD THE IP ADDRESS
-        HttpPost httpPost = new HttpPost("");
+        HttpPost httpPost = new HttpPost("http://192.168.56.1/index.php");
 
         List<NameValuePair> list = new ArrayList<NameValuePair>();
         list.add(new BasicNameValuePair("name","noprom"));

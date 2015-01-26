@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
         mTitle = (TextView) findViewById(R.id.id_title);
         mTextView_Error = (TextView) findViewById(R.id.textView_error);
 
-        mWebView.loadUrl("http://shouji.baidu.com");
+        mWebView.loadUrl("http://192.168.56.1/index.php");
         // 重写方法
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
